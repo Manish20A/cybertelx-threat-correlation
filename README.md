@@ -2,7 +2,11 @@
 
 **Team Name**: TheMysterious  
 **Team Members**: Manish Praveen Athvar, Krithik K  
-**Submission Date**: 7/9/2026
+**Submission Date**: 7/9/2026  
+**Live Site**: [cybertelx-threat-correlation.vercel.app](https://cybertelx-threat-correlation.vercel.app)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://cybertelx-threat-correlation.vercel.app)
+
 
 CyberTelX is a next-generation real-time threat intelligence and fraud correlation platform designed for enterprise banking environments. It bridges the gap between cybersecurity network telemetry and core transaction activity to proactively stop security breaches, block fraudulent transfers, and monitor rising post-quantum harvesting threats (Harvest-Now-Decrypt-Later).
 
