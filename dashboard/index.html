@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberTelX - Threat Intelligence & Transaction Correlation Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="logo-area">
+                <span class="logo-icon">🛡️</span>
+                <h1>CyberTelX</h1>
+                <span class="badge status-pill live">LIVE SYSTEM</span>
+            </div>
+            <div class="threat-alert-banner">
+                <div class="pulse-icon"></div>
+                <span id="banner-text">Monitoring transaction & telemetry streams...</span>
+            </div>
+            <div class="pqc-status">
+                <span class="pqc-label">PQC Sentinel:</span>
+                <span class="badge status-pill active-pqc">Kyber-1024 Enabled</span>
+            </div>
+        </header>
+
+        <!-- KPI Strip -->
+        <section class="kpi-strip">
+            <div class="kpi-card teal-glow">
+                <h3>Ingestion Stream</h3>
+                <p class="kpi-value" id="kpi-eps">2,305,142</p>
+                <span class="kpi-sub">Events / Sec</span>
+            </div>
+            <div class="kpi-card green-glow">
+                <h3>Correlation Latency</h3>
+                <p class="kpi-value" id="kpi-latency">14ms</p>
+                <span class="kpi-sub">Real-Time Joining</span>
+            </div>
+            <div class="kpi-card blue-glow">
+                <h3>Detection Accuracy</h3>
+                <p class="kpi-value" id="kpi-accuracy">97.8%</p>
+                <span class="kpi-sub">F1 Score Evaluated</span>
+            </div>
+            <div class="kpi-card gold-glow">
+                <h3>False Positive Rate</h3>
+                <p class="kpi-value" id="kpi-fpr">↓ 89%</p>
+                <span class="kpi-sub">Alert Noise Reduced</span>
+            </div>
+            <div class="kpi-card purple-glow">
+                <h3>PQC Compliance</h3>
+                <p class="kpi-value" id="kpi-pqc">94.2%</p>
+                <span class="kpi-sub">NIST Standard Readiness</span>
+            </div>
+        </section>
+
+        <!-- Main Workspace -->
+        <main class="dashboard-grid">
+            
+            <!-- Left Side: Live Event Feed & Active Alerts -->
+            <section class="grid-section feed-section">
+                <div class="section-header">
+                    <h2>🚨 Correlated Alerts Queue</h2>
+                    <span class="header-count" id="alert-count">3 Alerts</span>
+                </div>
+                <div class="alerts-list" id="alerts-queue">
+                    <!-- Dynamic Alerts Added Here -->
+                </div>
+                
+                <div class="section-header stream-header">
+                    <h2>📊 Ingested Log Stream</h2>
+                </div>
+                <div class="log-stream" id="log-terminal">
+                    <!-- Dynamic Live Logs Injected Here -->
+                </div>
+            </section>
+
+            <!-- Center: Graphic Correlation Map & Topology -->
+            <section class="grid-section map-section">
+                <div class="section-header">
+                    <h2>🕸️ Entity Link & Attack Graph</h2>
+                    <button class="btn btn-secondary" onclick="resetGraph()">Reset View</button>
+                </div>
+                <div class="graph-viewport">
+                    <svg id="network-graph" viewBox="0 0 600 400">
+                        <!-- SVG elements generated dynamically -->
+                    </svg>
+                    <div class="graph-legend">
+                        <span class="legend-item"><span class="dot user-dot"></span> User</span>
+                        <span class="legend-item"><span class="dot ip-dot"></span> IP</span>
+                        <span class="legend-item"><span class="dot dev-dot"></span> Device</span>
+                        <span class="legend-item"><span class="dot acc-dot"></span> Account</span>
+                    </div>
+                </div>
+                
+                <div class="kpi-row">
+                    <div class="kpi-card-mini">
+                        <span class="mini-label">Active Nodes</span>
+                        <span class="mini-value" id="graph-nodes">48</span>
+                    </div>
+                    <div class="kpi-card-mini">
+                        <span class="mini-label">Path Entropy</span>
+                        <span class="mini-value" id="graph-entropy">0.34</span>
+                    </div>
+                    <div class="kpi-card-mini">
+                        <span class="mini-label">Quantum Downgrades</span>
+                        <span class="mini-value" id="graph-downgrades" style="color: var(--accent-orange)">0</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Right Side: Explainability Narrative & SHAP Analysis -->
+            <section class="grid-section explanation-section">
+                <div class="section-header">
+                    <h2>🧠 Explainable AI Diagnostic</h2>
+                </div>
+                
+                <div id="no-selection-panel" class="detail-panel placeholder-panel">
+                    <div class="placeholder-icon">🔍</div>
+                    <p>Select an alert from the queue to view its AI correlation narrative, risk factor details, and cryptographic audit.</p>
+                </div>
+
+                <div id="detail-panel" class="detail-panel hide">
+                    <!-- Risk Score Banner -->
+                    <div class="detail-risk-banner" id="detail-header">
+                        <div class="risk-ring">
+                            <span class="risk-ring-value" id="detail-risk-val">94</span>
+                            <span class="risk-ring-label">RISK</span>
+                        </div>
+                        <div class="detail-meta">
+                            <h3 id="detail-user-id">Account Takeover Attempt</h3>
+                            <p id="detail-alert-id">Alert ID: ALT-4871</p>
+                            <span class="badge detail-sev-badge" id="detail-sev">CRITICAL</span>
+                        </div>
+                    </div>
+
+                    <!-- AI Narrative -->
+                    <div class="detail-narrative-box">
+                        <h4>AI Explainability Narrative</h4>
+                        <p id="detail-narrative-text">Loading...</p>
+                    </div>
+
+                    <!-- SHAP Attribution Bars -->
+                    <div class="shap-attribution">
+                        <h4>SHAP Feature Attributions</h4>
+                        <div class="shap-chart" id="shap-bars">
+                            <!-- Dynamic Bars Injected Here -->
+                        </div>
+                    </div>
+
+                    <!-- PQC / Cryptographic Audit -->
+                    <div class="crypto-audit-box">
+                        <div class="crypto-header">
+                            <span class="crypto-icon">⚛️</span>
+                            <h4>PQC & Cryptographic Handshake Audit</h4>
+                        </div>
+                        <div class="crypto-details">
+                            <p id="crypto-audit-text">Checking TLS handshake data...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
